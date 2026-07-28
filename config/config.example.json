@@ -1,0 +1,13 @@
+{
+  "app_name": "Sistema de Gestión de Ventas para Mini Juguetería",
+  "version": "1.0",
+  "environment": "development",
+  "database": {
+    "type": "sqlite",
+    "name": "jugueteria.db"
+  },
+  "settings": {
+    "currency": "USD",
+    "allow_negative_stock": false
+  }
+}
