@@ -178,3 +178,45 @@ El sistema rechaza el registro del producto.
 ### Estado
 
 Aprobado
+
+## CP-008 Actualizar stock correctamente
+
+**Requerimiento asociado:** RF-003
+
+### Precondición
+
+Producto JUG001 con stock 10.
+
+### Acción
+
+Agregar 5 unidades.
+
+### Resultado esperado
+
+El stock final del producto es 15.
+
+### Estado
+
+Aprobado
+
+---
+
+## CP-009 Evitar stock negativo
+
+**Requerimiento asociado:** RF-003
+
+### Precondición
+
+Producto JUG001 con stock 5.
+
+### Acción
+
+Intentar descontar 8 unidades.
+
+### Resultado esperado
+
+El sistema rechaza la operación por stock insuficiente.
+
+### Estado
+
+Aprobado

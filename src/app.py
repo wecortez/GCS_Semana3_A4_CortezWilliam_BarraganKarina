@@ -134,7 +134,8 @@ def mostrar_menu():
         print("1. Registrar producto")
         print("2. Consultar productos")
         print("3. Calcular total de venta")
-        print("4. Salir")
+        print("4. Actualizar stock")
+        print("5. Salir")
 
         opcion = input("Seleccione una opción: ").strip()
 
@@ -145,8 +146,19 @@ def mostrar_menu():
         elif opcion == "3":
             calcular_total()
         elif opcion == "4":
-            print("Sistema finalizado.")
-            break
+    codigo = input("Código del producto: ").strip()
+
+    try:
+        cantidad = int(input("Cantidad a modificar: "))
+    except ValueError:
+        print("Cantidad inválida.")
+        continue
+
+    actualizar_stock(codigo, cantidad)
+
+elif opcion == "5":
+    print("Sistema finalizado.")
+    break
         else:
             print("Opción inválida.")
 
@@ -186,3 +198,26 @@ def inicializar_base_datos():
     with obtener_conexion() as conexion:
         with open(SCHEMA_PATH, "r", encoding="utf-8") as archivo:
             conexion.executescript(archivo.read())
+
+def actualizar_stock(codigo, cantidad):
+    """Modifica el stock de un producto."""
+    producto = buscar_producto(codigo)
+
+    if producto is None:
+        print("Error: producto no encontrado.")
+        return False
+
+    nuevo_stock = producto["stock"] + cantidad
+
+    if nuevo_stock < 0:
+        print("Error: stock insuficiente.")
+        return False
+
+    with obtener_conexion() as conexion:
+        conexion.execute(
+            "UPDATE productos SET stock = ? WHERE codigo = ?",
+            (nuevo_stock, codigo),
+        )
+
+    print(f"Stock actualizado. Nuevo stock: {nuevo_stock}")
+    return True
