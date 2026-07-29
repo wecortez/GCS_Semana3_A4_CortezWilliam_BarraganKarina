@@ -11,3 +11,4 @@
 | EC-009 | Manual de usuario                | `docs/manuales/manual_usuario.md`           | Karina Barragán   | En desarrollo | —          |
 | EC-010 | Historial de cambios             | `CHANGELOG.md`                              | Ambos integrantes | Activo        | LB-001     |
 | EC-011 | Descripción general del proyecto | `README.md`                                 | Ambos integrantes | Revisado      | LB-001     |
+| EC-013 | Análisis de impacto de cambio    | `docs/ciclo_vida/impacto_cambio.md`         | William Cortez    | Aprobado      | —          |
