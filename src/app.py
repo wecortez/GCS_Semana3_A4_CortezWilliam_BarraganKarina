@@ -136,7 +136,8 @@ def mostrar_menu():
         print("2. Consultar productos")
         print("3. Calcular total de venta")
         print("4. Actualizar stock")
-        print("5. Salir")
+        print("5. Registrar venta")
+        print("6. Salir")
 
         opcion = input("Seleccione una opción: ").strip()
 
@@ -234,3 +235,63 @@ def crear_venta():
         )
 
         return cursor.lastrowid
+
+def registrar_venta():
+    """Registra una venta y descuenta las unidades vendidas."""
+    codigo = input("Código del producto: ").strip()
+    producto = buscar_producto(codigo)
+
+    if producto is None:
+        print("Producto no encontrado.")
+        return
+
+    try:
+        cantidad = int(input("Cantidad: "))
+    except ValueError:
+        print("Cantidad inválida.")
+        return
+
+    if cantidad <= 0:
+        print("La cantidad debe ser mayor que cero.")
+        return
+
+    if cantidad > producto["stock"]:
+        print("Stock insuficiente.")
+        return
+
+    subtotal = producto["precio"] * cantidad
+    fecha = datetime.now().isoformat(timespec="seconds")
+
+    with obtener_conexion() as conexion:
+        cursor = conexion.execute(
+            "INSERT INTO ventas (fecha, total) VALUES (?, ?)",
+            (fecha, subtotal),
+        )
+
+        venta_id = cursor.lastrowid
+
+        conexion.execute(
+            """
+            INSERT INTO detalle_venta
+            (venta_id, producto_id, cantidad, precio_unitario, subtotal)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+            (
+                venta_id,
+                producto["id"],
+                cantidad,
+                producto["precio"],
+                subtotal,
+            ),
+        )
+
+        conexion.execute(
+            """
+            UPDATE productos
+            SET stock = stock - ?
+            WHERE id = ?
+            """,
+            (cantidad, producto["id"]),
+        )
+
+    print(f"Venta registrada. Total: ${subtotal:.2f}")
