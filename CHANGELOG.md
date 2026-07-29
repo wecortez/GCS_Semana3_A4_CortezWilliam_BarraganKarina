@@ -38,3 +38,10 @@ Versión inicial preparada para establecer la línea base LB-001.
 - Persistencia de productos mediante SQLite.
 - Inicialización automática del esquema de base de datos.
 - Consulta de productos almacenados persistentemente.
+
+### Rama desarrollokb - Karina Barragán
+
+#### Agregado
+- Estructura inicial para la gestión de ventas.
+- Creación de registros de venta.
+- Actualización de la arquitectura del módulo de ventas.

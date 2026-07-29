@@ -220,3 +220,69 @@ El sistema rechaza la operación por stock insuficiente.
 ### Estado
 
 Aprobado
+
+## CP-010 Registrar venta correctamente
+
+**Requerimientos asociados:** RF-002, RF-003, RF-005
+
+### Precondición
+
+Existe el producto:
+
+- Código: JUG001
+- Precio: 10.00
+- Stock: 10
+
+### Datos de entrada
+
+Cantidad: 3
+
+### Resultado esperado
+
+- La venta se registra.
+- El total es 30.00.
+- El stock pasa de 10 a 7.
+
+### Estado
+
+Aprobado
+
+---
+
+## CP-011 Venta con stock insuficiente
+
+**Requerimiento asociado:** RF-003
+
+### Precondición
+
+Producto con stock 2.
+
+### Datos de entrada
+
+Cantidad solicitada: 5.
+
+### Resultado esperado
+
+El sistema rechaza la venta y conserva el stock existente.
+
+### Estado
+
+Aprobado
+
+---
+
+## CP-012 Cantidad de venta inválida
+
+**Requerimiento asociado:** RF-002
+
+### Datos de entrada
+
+Cantidad: 0.
+
+### Resultado esperado
+
+El sistema rechaza la operación.
+
+### Estado
+
+Aprobado

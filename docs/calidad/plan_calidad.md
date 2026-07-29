@@ -76,3 +76,13 @@ Una funcionalidad será considerada aceptada cuando:
 Versión: 1.0  
 Estado: Revisado  
 Línea base: LB-001
+
+## Matriz básica de trazabilidad
+
+| Requerimiento | Funcionalidad | Caso de prueba |
+|---|---|---|
+| RF-001 | Registrar producto | CP-001, CP-003, CP-006 |
+| RF-002 | Registrar venta | CP-010, CP-012 |
+| RF-003 | Actualizar inventario | CP-008, CP-009, CP-010, CP-011 |
+| RF-004 | Consultar productos | CP-002 |
+| RF-005 | Calcular total | CP-005, CP-010 |
