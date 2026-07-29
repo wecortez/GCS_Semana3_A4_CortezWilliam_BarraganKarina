@@ -32,3 +32,9 @@ Versión inicial preparada para establecer la línea base LB-001.
 - Validación de códigos duplicados.
 - Validación de campos obligatorios.
 - Reglas de exclusión para archivos locales y sensibles mediante `.gitignore`.
+
+### Agregado
+
+- Persistencia de productos mediante SQLite.
+- Inicialización automática del esquema de base de datos.
+- Consulta de productos almacenados persistentemente.

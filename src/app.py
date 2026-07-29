@@ -8,6 +8,8 @@ Línea base: LB-001
 
 productos = []
 
+import sqlite3
+from pathlib import Path
 
 def registrar_producto():
     """Registra un producto en memoria."""
@@ -78,14 +80,23 @@ def registrar_producto():
 
 
 def consultar_productos():
-    """Muestra los productos registrados."""
+    """Consulta todos los productos almacenados."""
     print("\n--- Productos disponibles ---")
 
-    if not productos:
+    with obtener_conexion() as conexion:
+        registros = conexion.execute(
+            """
+            SELECT codigo, nombre, categoria, precio, stock
+            FROM productos
+            ORDER BY nombre
+            """
+        ).fetchall()
+
+    if not registros:
         print("No existen productos registrados.")
         return
 
-    for producto in productos:
+    for producto in registros:
         print(
             f"Código: {producto['codigo']} | "
             f"Nombre: {producto['nombre']} | "
@@ -93,7 +104,6 @@ def consultar_productos():
             f"Precio: ${producto['precio']:.2f} | "
             f"Stock: {producto['stock']}"
         )
-
 
 def calcular_total():
     """Calcula el total de una venta simple."""
@@ -142,11 +152,37 @@ def mostrar_menu():
 
 
 if __name__ == "__main__":
+    inicializar_base_datos()
     mostrar_menu()
 
     def buscar_producto(codigo):
-    """Busca un producto por su código."""
-    for producto in productos:
-        if producto["codigo"] == codigo:
-            return producto
-    return None
+    """Busca un producto registrado por su código."""
+    with obtener_conexion() as conexion:
+    conexion.execute(
+        """
+        INSERT INTO productos (codigo, nombre, categoria, precio, stock)
+        VALUES (?, ?, ?, ?, ?)
+        """,
+        (codigo, nombre, categoria, precio, stock),
+    )
+
+print("Producto registrado correctamente.")
+
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+DB_PATH = BASE_DIR / "jugueteria.db"
+SCHEMA_PATH = BASE_DIR / "database" / "schema.sql"
+
+
+def obtener_conexion():
+    """Crea una conexión con la base de datos SQLite."""
+    conexion = sqlite3.connect(DB_PATH)
+    conexion.row_factory = sqlite3.Row
+    return conexion
+
+
+def inicializar_base_datos():
+    """Crea las tablas del sistema si todavía no existen."""
+    with obtener_conexion() as conexion:
+        with open(SCHEMA_PATH, "r", encoding="utf-8") as archivo:
+            conexion.executescript(archivo.read())
