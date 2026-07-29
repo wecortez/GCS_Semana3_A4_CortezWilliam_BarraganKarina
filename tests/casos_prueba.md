@@ -133,3 +133,48 @@ Los siguientes casos se implementarán después de LB-001:
 - Descuento automático del stock.
 - Validación de stock insuficiente.
 - Persistencia de productos en base de datos.
+
+---
+
+## CP-006 Registrar producto con código duplicado
+
+**Requerimiento asociado:** RF-001
+
+### Precondición
+
+Existe un producto registrado con código `JUG001`.
+
+### Datos de entrada
+
+- Código: JUG001
+- Nombre: Camión
+- Categoría: Vehículos
+- Precio: 15.00
+- Stock: 5
+
+### Resultado esperado
+
+El sistema rechaza el registro e informa que ya existe
+un producto con el mismo código.
+
+### Estado
+
+Aprobado
+
+---
+
+## CP-007 Validar campos obligatorios
+
+**Requerimiento asociado:** RF-001
+
+### Datos de entrada
+
+Nombre vacío.
+
+### Resultado esperado
+
+El sistema rechaza el registro del producto.
+
+### Estado
+
+Aprobado

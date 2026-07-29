@@ -23,3 +23,12 @@ Todos los cambios relevantes del proyecto serán registrados en este archivo.
 ### Estado
 
 Versión inicial preparada para establecer la línea base LB-001.
+
+## [Modificación]
+
+### Agregado
+
+- Búsqueda de productos por código.
+- Validación de códigos duplicados.
+- Validación de campos obligatorios.
+- Reglas de exclusión para archivos locales y sensibles mediante `.gitignore`.

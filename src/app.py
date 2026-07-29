@@ -14,6 +14,43 @@ def registrar_producto():
     print("\n--- Registrar producto ---")
 
     codigo = input("Código: ").strip()
+
+    if buscar_producto(codigo):
+        print("Error: ya existe un producto con ese código.")
+        return
+
+    nombre = input("Nombre: ").strip()
+    categoria = input("Categoría: ").strip()
+
+    try:
+        precio = float(input("Precio: "))
+        stock = int(input("Stock: "))
+    except ValueError:
+        print("Error: precio o stock inválido.")
+        return
+
+    if not codigo or not nombre or not categoria:
+        print("Error: los campos son obligatorios.")
+        return
+
+    if precio < 0 or stock < 0:
+        print("Error: precio y stock no pueden ser negativos.")
+        return
+
+    producto = {
+        "codigo": codigo,
+        "nombre": nombre,
+        "categoria": categoria,
+        "precio": precio,
+        "stock": stock,
+    }
+
+    productos.append(producto)
+    print("Producto registrado correctamente.")
+    """Registra un producto en memoria."""
+    print("\n--- Registrar producto ---")
+
+    codigo = input("Código: ").strip()
     nombre = input("Nombre: ").strip()
     categoria = input("Categoría: ").strip()
 
@@ -106,3 +143,10 @@ def mostrar_menu():
 
 if __name__ == "__main__":
     mostrar_menu()
+
+    def buscar_producto(codigo):
+    """Busca un producto por su código."""
+    for producto in productos:
+        if producto["codigo"] == codigo:
+            return producto
+    return None
