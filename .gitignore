@@ -1,0 +1,25 @@
+# Configuración local y datos sensibles
+config/config.json
+.env
+.env.*
+
+# Base de datos generada localmente
+*.db
+*.sqlite
+*.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# IDE / Sistema operativo
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Archivos temporales
+*.log
+*.tmp
