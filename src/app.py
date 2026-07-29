@@ -10,6 +10,7 @@ productos = []
 
 import sqlite3
 from pathlib import Path
+from datetime import datetime
 
 def registrar_producto():
     """Registra un producto en memoria."""
@@ -221,3 +222,15 @@ def actualizar_stock(codigo, cantidad):
 
     print(f"Stock actualizado. Nuevo stock: {nuevo_stock}")
     return True
+
+def crear_venta():
+    """Crea una nueva venta vacía y devuelve su identificador."""
+    fecha = datetime.now().isoformat(timespec="seconds")
+
+    with obtener_conexion() as conexion:
+        cursor = conexion.execute(
+            "INSERT INTO ventas (fecha, total) VALUES (?, ?)",
+            (fecha, 0),
+        )
+
+        return cursor.lastrowid

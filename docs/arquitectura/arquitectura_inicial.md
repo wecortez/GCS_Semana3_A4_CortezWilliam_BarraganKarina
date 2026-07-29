@@ -90,3 +90,13 @@ Controla el stock disponible y actualiza las cantidades después de una venta.
 Versión: 1.0  
 Estado: Aprobado  
 Línea base: LB-001
+
+### Módulo de ventas
+
+El módulo de ventas se encargará de:
+
+1. Crear la cabecera de una venta.
+2. Registrar los productos vendidos.
+3. Calcular subtotales.
+4. Calcular el total.
+5. Actualizar el inventario.
